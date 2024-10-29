@@ -64,10 +64,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: googleapis/release-please-action
+          repository: spacecowboy/release-please-action
           ref: main
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm install --save googleapis/release-please#${{ github.ref }}
+      - run: npm install --save spacecowboy/release-please#${{ github.ref }}
       - run: npm run build

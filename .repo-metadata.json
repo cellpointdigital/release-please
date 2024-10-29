@@ -3,9 +3,9 @@
   "name_pretty": "Release Please",
   "release_level": "stable",
   "language": "nodejs",
-  "repo": "googleapis/release-please",
+  "repo": "spacecowboy/release-please",
   "distribution_name": "release-please",
-  "codeowner_team": "@googleapis/github-automation",
+  "codeowner_team": "@spacecowboy/github-automation",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/release-please/latest",
   "library_type": "OTHER"
 }
