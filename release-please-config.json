@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/spacecowboy/release-please/main/schemas/config.json",
+  "$schema": "https://raw.githubusercontent.com/cellpointdigital/release-please/main/schemas/config.json",
   "release-type": "node",
   "include-component-in-tag": false,
   "packages": {
