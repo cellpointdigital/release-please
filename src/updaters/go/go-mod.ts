@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {logger as defaultLogger, Logger} from '../../util/logger';
-import {DefaultUpdater} from '../default';
+import { logger as defaultLogger, Logger } from '../../util/logger';
+import { DefaultUpdater } from '../default';
 
 /**
  * Updates `go.mod` files, preserving formatting and comments.
@@ -32,7 +32,9 @@ export class GoMod extends DefaultUpdater {
     }
 
     for (const [pkgName, pkgVersion] of this.versionsMap) {
-      const regex = new RegExp(`${pkgName} v\\d+\\.\\d+\\.\\d+`, 'g');
+      // Easy version is v1.2.3
+      // But if depending on a commit it could be v0.1.1-0.20250203122516-4c838e530ecb
+      const regex = new RegExp(`${pkgName} v\\d+\\.\\d+\\.\\d+\\S*`, 'g');
       // Is the dep in the go.mod file?
       const deps = regex.exec(payload);
 
@@ -43,7 +45,7 @@ export class GoMod extends DefaultUpdater {
 
       for (const dep of deps) {
         const oldVersion = dep.split(' ')[1];
-        logger.info(`updating ${pkgName} from ${oldVersion} to ${pkgVersion}`);
+        logger.info(`updating ${pkgName} from ${oldVersion} to v${pkgVersion}`);
 
         payload = payload.replace(dep, `${pkgName} v${pkgVersion}`);
       }

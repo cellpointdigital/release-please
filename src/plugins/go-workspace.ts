@@ -25,20 +25,20 @@ import {
   addPath,
   appendDependenciesSectionToChangelog,
 } from './workspace';
-import {parseGoWorkspace} from '../updaters/go/common';
-import {VersionsMap, Version} from '../version';
-import {GoMod} from '../updaters/go/go-mod';
-import {RawContent} from '../updaters/raw-content';
-import {Changelog} from '../updaters/changelog';
-import {ReleasePullRequest} from '../release-pull-request';
-import {PullRequestTitle} from '../util/pull-request-title';
-import {PullRequestBody} from '../util/pull-request-body';
-import {BranchName} from '../util/branch-name';
-import {PatchVersionUpdate} from '../versioning-strategy';
-import {Strategy} from '../strategy';
-import {Release} from '../release';
-import {GitHub} from '../github';
-import {Commit} from '../commit';
+import { parseGoWorkspace } from '../updaters/go/common';
+import { VersionsMap, Version } from '../version';
+import { GoMod } from '../updaters/go/go-mod';
+import { RawContent } from '../updaters/raw-content';
+import { Changelog } from '../updaters/changelog';
+import { ReleasePullRequest } from '../release-pull-request';
+import { PullRequestTitle } from '../util/pull-request-title';
+import { PullRequestBody } from '../util/pull-request-body';
+import { BranchName } from '../util/branch-name';
+import { PatchVersionUpdate } from '../versioning-strategy';
+import { Strategy } from '../strategy';
+import { Release } from '../release';
+import { GitHub } from '../github';
+import { Commit } from '../commit';
 
 interface GoModInfo {
   /**
@@ -189,8 +189,8 @@ export class GoWorkspace extends WorkspacePlugin<GoModInfo> {
 
     const basePullRequest = strategy
       ? await strategy.buildReleasePullRequest([], latestRelease, false, [], {
-          newVersion: newVersion,
-        })
+        newVersion: newVersion,
+      })
       : undefined;
 
     if (basePullRequest) {
@@ -268,7 +268,7 @@ export class GoWorkspace extends WorkspacePlugin<GoModInfo> {
     const goWorkspace = parseGoWorkspace(goWorkspaceContent.parsedContent);
     if (!goWorkspace?.members) {
       this.logger.warn('go-workspace plugin used, but found no use directives');
-      return {allPackages: [], candidatesByPackage: {}};
+      return { allPackages: [], candidatesByPackage: {} };
     }
 
     const allPackages: GoModInfo[] = [];
@@ -354,7 +354,7 @@ export class GoWorkspace extends WorkspacePlugin<GoModInfo> {
 
     // Parses a go.mod file and returns a list of dependencies
     const parseDependencies = (content: string): string[] => {
-      const depRegex = /(\S+)\s+v(\d+\.\d+\.\d+)/gm;
+      const depRegex = /(\S+)\s+v(\d+\.\d+\.\d+\S*)/gm;
       const deps: string[] = [];
       let match;
       while ((match = depRegex.exec(content)) !== null) {
@@ -434,7 +434,7 @@ function getChangelogDepsNotes(
   // They contain like example.com/foo/bar v1.0.0
   // Iterate over the lines and build a list of dependencies
   // Do the same for the updated content
-  const depRegex = /(\S+)\s+v?(\d+\.\d+\.\d+)/gm;
+  const depRegex = /(\S+)\s+v?(\d+\.\d+\.\d+\S*)/gm;
 
   const parseDependencies = (content: string): Map<string, string> => {
     const deps = new Map<string, string>();
