@@ -28,7 +28,7 @@ import {
 } from './errors';
 
 const MAX_ISSUE_BODY_SIZE = 65536;
-const MAX_SLEEP_SECONDS = 60;
+const MAX_SLEEP_SECONDS = 120;
 export const GH_API_URL = 'https://api.github.com';
 export const GH_GRAPHQL_URL = 'https://api.github.com';
 type OctokitType = InstanceType<typeof Octokit>;
@@ -616,7 +616,7 @@ export class GitHub {
         }
         maxRetries -= 1;
         if (maxRetries >= 0) {
-          this.logger.trace(`sleeping ${seconds} seconds`);
+          this.logger.info(`sleeping ${seconds} seconds`);
           await sleepInMs(1000 * seconds);
           seconds = Math.min(seconds * 2, MAX_SLEEP_SECONDS);
         }
