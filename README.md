@@ -1,3 +1,14 @@
+# CELLPOINT FORK DETAILS
+
+Based on main from googleapis/release-please.
+
+1. Merged go-workspace branch to main (adds Go workspace module)
+2. Merged github-fixes branch to main (points publishing details to this repo for publication)
+
+This fork exists to add the Go workspace module to release-please. This vastly simplifies release in the Go monorepo.
+
+# Original readme
+
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
 # [Release Please](https://github.com/googleapis/release-please)
